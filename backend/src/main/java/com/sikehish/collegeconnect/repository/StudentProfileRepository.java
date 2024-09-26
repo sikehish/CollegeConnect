@@ -14,7 +14,8 @@ public interface StudentProfileRepository extends JpaRepository<StudentProfile, 
     Optional<StudentProfile> findByUser_Username(String username);
     @Query("SELECT sp FROM StudentProfile sp WHERE " +
             "(:name IS NULL OR LOWER(sp.user.name) LIKE LOWER(CONCAT('%', :name, '%'))) AND " +
-            "(:departmentId IS NULL OR sp.department.id = :departmentId) AND " +
-            "(:year IS NULL OR sp.year = :year)")
-    List<StudentProfile> searchStudents(String name, Long departmentId, String year);
+            "(:departmentName IS NULL OR LOWER(sp.department.name) LIKE LOWER(CONCAT('%', :departmentName, '%'))) AND " +
+            "(:year IS NULL OR LOWER(sp.year) LIKE LOWER(CONCAT('%', :year, '%')))")
+    List<StudentProfile> searchStudents(String name, String departmentName, String year);
+
 }

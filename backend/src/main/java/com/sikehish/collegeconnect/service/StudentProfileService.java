@@ -40,8 +40,8 @@ public class StudentProfileService {
         return academicInfoRepository.findByStudentUsername(studentUsername);
     }
 
-    public List<StudentProfile> searchStudents(String name, Long departmentId, String year) {
-        return studentProfileRepository.searchStudents(name, departmentId, year);
+    public List<StudentProfile> searchStudents(String name, String departmentName, String year) {
+        return studentProfileRepository.searchStudents(name, departmentName, year);
     }
 
 

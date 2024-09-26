@@ -44,8 +44,8 @@ public class StudentProfileController {
     @GetMapping("/search")
     public List<StudentProfile> searchStudents(
             @RequestParam(required = false) String name,
-            @RequestParam(required = false) Long departmentId,
+            @RequestParam(required = false) String departmentName,
             @RequestParam(required = false) String year) {
-        return studentProfileService.searchStudents(name, departmentId, year);
+        return studentProfileService.searchStudents(name, departmentName, year);
     }
 }
