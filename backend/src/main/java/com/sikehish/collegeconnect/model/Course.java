@@ -22,8 +22,8 @@ public class Course {
     @JoinColumn(name = "faculty_id", nullable = false)
     private FacultyProfile faculty;
 
-    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
-    private Set<Enrollment> enrollments;
+//    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
+//    private Set<Enrollment> enrollments;
 
     // Default constructor
     public Course() {}
@@ -69,11 +69,11 @@ public class Course {
         this.faculty = faculty;
     }
 
-    public Set<Enrollment> getEnrollments() {
-        return enrollments;
-    }
-
-    public void setEnrollments(Set<Enrollment> enrollments) {
-        this.enrollments = enrollments;
-    }
+//    public Set<Enrollment> getEnrollments() {
+//        return enrollments;
+//    }
+//
+//    public void setEnrollments(Set<Enrollment> enrollments) {
+//        this.enrollments = enrollments;
+//    }
 }

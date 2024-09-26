@@ -34,9 +34,12 @@ public class StudentProfileController {
     private AcademicInfoService academicInfoService;
 
     @GetMapping("/academic")
-    public List<AcademicInfo> getAcademicInfo(@AuthenticationPrincipal String username) {
+    public List<AcademicInfo> getAcademicInfo(@AuthenticationPrincipal CustomUserDetails userDetails) {
+        String username = userDetails.getUsername(); // Adjust this based on your UserDetails implementation
+        System.out.println("Fetching academic info for: " + username);
         return academicInfoService.getAcademicInfoByStudentUsername(username);
     }
+
 
     @GetMapping("/search")
     public List<StudentProfile> searchStudents(
