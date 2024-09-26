@@ -131,9 +131,3 @@ public class WebUser {
         this.administratorProfile = administratorProfile;
     }
 }
-
-enum Role {
-    STUDENT,
-    FACULTY_MEMBER,
-    ADMINISTRATOR
-}

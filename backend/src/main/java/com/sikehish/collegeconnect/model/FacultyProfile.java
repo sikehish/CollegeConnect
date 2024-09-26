@@ -21,10 +21,14 @@ public class FacultyProfile {
 
     private String officeHours;
 
+
+
     // Default constructor
     public FacultyProfile() {}
 
+
     // Getters and Setters
+
     public Long getUserId() {
         return userId;
     }
