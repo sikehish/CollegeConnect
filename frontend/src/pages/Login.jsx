@@ -2,12 +2,13 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import { useAuthContext } from "../context/AuthContext"; // Import the context hook
 import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("STUDENT"); // Default role
-
+  const navigate=useNavigate()
   const { dispatch } = useAuthContext(); 
 
   const handleSubmit = async (e) => {
@@ -32,6 +33,15 @@ const Login = () => {
         dispatch({ type: "LOGIN", payload: data });
 
         toast.success("Logged in successfully!");
+
+        switch(role){
+            case "STUDENT":
+                return navigate("/student");
+            case "FACULTY_MEMBER":
+                return navigate("/faculty")
+            case "ADMINISTRATOR":
+                return navigate("/administrator")    
+        }
 
         // Optionally redirect after login
         // window.location.href = "/dashboard";
