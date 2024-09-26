@@ -28,15 +28,6 @@ public class WebUser {
     @Column(nullable = true)
     private String phone;
 
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-    private StudentProfile studentProfile;
-
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-    private FacultyProfile facultyProfile;
-
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-    private AdministratorProfile administratorProfile;
-
     // Constructors
     public WebUser() {
     }
@@ -107,27 +98,4 @@ public class WebUser {
         this.phone = phone;
     }
 
-    public StudentProfile getStudentProfile() {
-        return studentProfile;
-    }
-
-    public void setStudentProfile(StudentProfile studentProfile) {
-        this.studentProfile = studentProfile;
-    }
-
-    public FacultyProfile getFacultyProfile() {
-        return facultyProfile;
-    }
-
-    public void setFacultyProfile(FacultyProfile facultyProfile) {
-        this.facultyProfile = facultyProfile;
-    }
-
-    public AdministratorProfile getAdministratorProfile() {
-        return administratorProfile;
-    }
-
-    public void setAdministratorProfile(AdministratorProfile administratorProfile) {
-        this.administratorProfile = administratorProfile;
-    }
 }

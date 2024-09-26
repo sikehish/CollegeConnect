@@ -26,7 +26,10 @@ public class SecurityConfig {
         http.csrf().disable()
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/auth/login", "/api/auth/test").permitAll()  // Permit login and test endpoints
-                        .requestMatchers("/api/student/**").hasRole("STUDENT")  // Allow only students to access this endpoint
+                        .requestMatchers("/api/student/**").hasAuthority("STUDENT")  // Allow only students to access this endpoint
+                        .requestMatchers("/api/faculty/**").hasAuthority("FACULTY_MEMBER")  // Allow only faculty members
+                        .requestMatchers("/api/admin/**").hasAuthority("ADMINISTRATOR")  // Allow only administrators
+//                        .requestMatchers("/api/common/**").hasAnyRole("STUDENT", "FACULTY_MEMBER", "ADMINISTRATOR")  // Allow access to all roles
                         .anyRequest().authenticated()  // All other requests must be authenticated
                 )
                 .sessionManagement()
@@ -35,6 +38,7 @@ public class SecurityConfig {
                 .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class); // Add JWT filter
         return http.build();
     }
+
 
     @Bean
     public PasswordEncoder passwordEncoder() {

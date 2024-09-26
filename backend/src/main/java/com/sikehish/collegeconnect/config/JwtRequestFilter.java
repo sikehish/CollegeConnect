@@ -5,6 +5,8 @@ import io.jsonwebtoken.Claims;
 import jakarta.servlet.ServletException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
@@ -14,6 +16,8 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Collection;
+import java.util.List;
 
 @Component
 public class JwtRequestFilter extends OncePerRequestFilter {
@@ -40,10 +44,17 @@ public class JwtRequestFilter extends OncePerRequestFilter {
             Claims claims = jwtUtil.extractAllClaims(token);
 
             if (jwtUtil.isTokenValid(token, username)) {
+                // Assuming roles are stored as a string in JWT (e.g., "STUDENT", "ADMINISTRATOR")
+                Collection<GrantedAuthority> authorities = List.of(new SimpleGrantedAuthority(role));
+
                 CustomUserDetails userDetails = new CustomUserDetails(username, role);
+
+                // Pass the authorities to the authentication token
                 UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
-                        userDetails, null, null);
+                        userDetails, null, authorities);
                 authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+
+                // Set the authentication in the SecurityContext
                 SecurityContextHolder.getContext().setAuthentication(authToken);
             }
         }
