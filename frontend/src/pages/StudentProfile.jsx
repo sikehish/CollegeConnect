@@ -35,7 +35,6 @@ const StudentProfile = () => {
         }
 
         const data = await response.json();
-        console.log(data)
         setProfileData(data);
 
         // Fetch academic data
@@ -51,6 +50,8 @@ const StudentProfile = () => {
         }
 
         const academicData = await academicResponse.json();
+        console.log(academicData)
+
         setAcademicData(academicData);
       } catch (err) {
         setError(err.message);

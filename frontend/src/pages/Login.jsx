@@ -36,7 +36,7 @@ const Login = () => {
 
         switch(role){
             case "STUDENT":
-                return navigate("/student");
+                return navigate("/student/profile");
             case "FACULTY_MEMBER":
                 return navigate("/faculty")
             case "ADMINISTRATOR":
